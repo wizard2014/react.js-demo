@@ -5,8 +5,12 @@ var ReactDOM 	= require('react-dom');
 var ReactRouter = require('react-router');
 var Router 		= ReactRouter.Router;
 var Route 		= ReactRouter.Route;
-var Navigation  = ReactRouter.Navigation;
+var Navigation  = ReactRouter.Navigation; // mixin
+var History 	= ReactRouter.History;
 var createBrowserHistory = require('history/lib/createBrowserHistory');
+
+// helper
+var h = require('./helpers');
 
 /*
  * App
@@ -83,11 +87,22 @@ var App = React.createClass({
  */
 var StorePicker = React.createClass({
 
+	mixins: [History],
+
+	goToStore: function(e) {
+		e.preventDefault();
+
+		// get the data from input
+		var storeId = this.refs.storeId.value;		
+		// transition from <StorePicker/> to <App/>
+		this.history.pushState(null, '/store/' + storeId);
+	},
+
 	render: function() {
 		return (
-			<form className="store-selector">
+			<form className="store-selector" onSubmit={this.goToStore}>
 				<h2>Please Enter A Store.</h2>
-				<input type="text" ref="storeId" required />
+				<input type="text" ref="storeId" defaultValue={h.getFunName()} required />
 				<input type="submit" value="Submit" />
 			</form>
 		);
