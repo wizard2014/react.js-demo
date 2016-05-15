@@ -66,6 +66,7 @@ var App = React.createClass({
 	componentWillUpdate: function(nextProps, nextState) {
 		localStorage.setItem('order-' + this.props.params.storeId, JSON.stringify(nextState.order));
 	},
+	
 	getInitialState: function() {
 		return {
 			fishes: {},
