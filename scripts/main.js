@@ -202,6 +202,9 @@ var App = React.createClass({
  				</h3>
  			</header>
 		);
+ 	},
+ 	propTypes: {
+ 		tagline: React.PropTypes.string.isRequired
  	}
  });
 
@@ -268,6 +271,11 @@ var App = React.createClass({
 
  			</div>
 		);
+ 	},
+ 	propTypes: {
+ 		fishes : React.PropTypes.object.isRequired,
+		order : React.PropTypes.object.isRequired,
+		removeFromOrder : React.PropTypes.func.isRequired
  	}
  });
 
@@ -310,6 +318,13 @@ var App = React.createClass({
 	 			<button onClick={this.props.loadSamples}>Load Sample Fishes</button>
  			</div>
 		);
+ 	},
+ 	propTypes: {
+ 		addFish: React.PropTypes.func.isRequired,
+		loadSamples: React.PropTypes.func.isRequired,
+		fishes: React.PropTypes.object.isRequired,
+		linkState: React.PropTypes.func.isRequired,
+		removeFish: React.PropTypes.func.isRequired
  	}
  });
 
