@@ -6,7 +6,6 @@ var CSSTransitionGroup = require('react-addons-css-transition-group');
 var ReactRouter = require('react-router');
 var Router 		= ReactRouter.Router;
 var Route 		= ReactRouter.Route;
-var Navigation  = ReactRouter.Navigation; 	// mixin
 var History 	= ReactRouter.History;		// mixin
 var createBrowserHistory = require('history/lib/createBrowserHistory');
 
@@ -18,6 +17,13 @@ var Rebase = require('re-base');
 var base   = Rebase.createClass('https://react1.firebaseio.com/');
 
 var Catalyst = require('react-catalyst');
+
+/*
+ * Inport components
+ */
+ import NotFound from './components/NotFound';
+ import StorePicker from './components/StorePicker';
+ import Header from './components/Header';
 
 /*
  * App
@@ -182,33 +188,6 @@ var App = React.createClass({
  });
 
 /*
- * Header
- * @component <Header/>
- */
- var Header = React.createClass({
-
- 	render: function() {
- 		return (
- 			<header className="top">
- 				<h1>Catch
- 				<span className="ofThe">
- 					<span className="of">of</span> 
- 					<span className="the">the</span>
- 				</span> 				
- 				Day</h1>
-
- 				<h3 className="tagline">
- 					<span>{this.props.tagline}</span>
- 				</h3>
- 			</header>
-		);
- 	},
- 	propTypes: {
- 		tagline: React.PropTypes.string.isRequired
- 	}
- });
-
-/*
  * Order
  * @component <Order/>
  */
@@ -325,47 +304,6 @@ var App = React.createClass({
 		fishes: React.PropTypes.object.isRequired,
 		linkState: React.PropTypes.func.isRequired,
 		removeFish: React.PropTypes.func.isRequired
- 	}
- });
-
-/*
- * Store picker
- * @component <StorePicker/>
- */
-var StorePicker = React.createClass({
-
-	mixins: [History],
-
-	goToStore: function(e) {
-		e.preventDefault();
-
-		// get the data from input
-		var storeId = this.refs.storeId.value;		
-		// transition from <StorePicker/> to <App/>
-		this.history.pushState(null, '/store/' + storeId);
-	},
-
-	render: function() {
-		return (
-			<form className="store-selector" onSubmit={this.goToStore}>
-				<h2>Please Enter A Store.</h2>
-				<input type="text" ref="storeId" defaultValue={h.getFunName()} required />
-				<input type="submit" value="Submit" />
-			</form>
-		);
-	}
-});
-
-/*
- * Not Found
- * @component <NotFound/>
- */
- var NotFound = React.createClass({
-
- 	render: function() {
- 		return (
- 			<h2>Not Found!</h2>
-		);
  	}
  });
 
