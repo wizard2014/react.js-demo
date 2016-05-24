@@ -1,25 +1,25 @@
 import React from 'react';
 import { History } from 'react-router';
 import h from '../helpers';
+import reactMixin from 'react-mixin';
 
 /*
  * Store picker
  * @component <StorePicker/>
  */
-var StorePicker = React.createClass({
+class StorePicker extends React.Component {
+	mixins: [History]
 
-	mixins: [History],
-
-	goToStore: function(e) {
+	goToStore(e) {
 		e.preventDefault();
 
 		// get the data from input
 		var storeId = this.refs.storeId.value;		
 		// transition from <StorePicker/> to <App/>
 		this.history.pushState(null, '/store/' + storeId);
-	},
+	}
 
-	render: function() {
+	render() {
 		return (
 			<form className="store-selector" onSubmit={this.goToStore}>
 				<h2>Please Enter A Store.</h2>
@@ -28,6 +28,8 @@ var StorePicker = React.createClass({
 			</form>
 		);
 	}
-});
+}
+
+reactMixin.onClass(StorePicker, History);
 
 export default StorePicker;
