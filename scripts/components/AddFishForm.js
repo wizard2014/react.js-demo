@@ -1,12 +1,13 @@
 import React from 'react';
+import autobind from 'autobind-decorator';
 
 /*
  * Add Fish Form
  * @component <AddFishForm/>
  */
- var AddFishForm = React.createClass({
-
- 	createFish: function(e) {
+ @autobind
+ class AddFishForm extends React.Component {
+ 	createFish(e) {
  		e.preventDefault();
 
  		// get the data from form
@@ -21,9 +22,9 @@ import React from 'react';
  		// add the fish to the App Store
  		this.props.addFish(fish);
  		this.refs.fishForm.reset();
- 	},
+ 	}
 
- 	render: function() {
+ 	render() {
  		return (
  			<form className="fish-edit" ref="fishForm" onSubmit={this.createFish}>
  				<input type="text" ref="name" placeholder="Fish Name" />
@@ -38,6 +39,6 @@ import React from 'react';
  			</form>
 		);
  	}
- });
+ }
 
  export default AddFishForm;
