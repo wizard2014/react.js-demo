@@ -10,8 +10,6 @@ import autobind from 'autobind-decorator';
  */
 @autobind
 class StorePicker extends React.Component {
-	mixins: [History]
-
 	goToStore(e) {
 		e.preventDefault();
 
